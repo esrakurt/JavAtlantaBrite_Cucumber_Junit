@@ -19,7 +19,7 @@ public class Hooks {
         Driver.getDriver().manage().window().maximize();
     }
 
-    @After
+  //  @After
     public void tearDown(Scenario scenario){
         System.out.println("I am reporting the results");
         // I want to take screenshot when current scenario fails.
