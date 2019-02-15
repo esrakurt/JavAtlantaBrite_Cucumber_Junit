@@ -1,5 +1,6 @@
 package com.cybertek.pages;
 
+import com.cybertek.utilities.ConfigurationReader;
 import com.cybertek.utilities.Driver;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -7,6 +8,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import java.util.List;
+import java.util.Random;
 
 public class CRMUserPipelinePage {
 
@@ -14,11 +16,37 @@ public class CRMUserPipelinePage {
         PageFactory.initElements(Driver.getDriver(), this);
     }
 
+    @FindBy(id = "login")
+    public WebElement email;
+
+    @FindBy(id = "password")
+    public WebElement password;
+
+//    @FindBy(xpath = "//input[@name='csrf_token']")
+//    public WebElement hiddenMessage;
+
+    @FindBy(xpath = "//*[@type='submit']")
+    public WebElement loginButton;
+
+    //Sign in
+    @FindBy(linkText="Sign in")
+    public WebElement signIn;
+
+    //Sign in
+    @FindBy(linkText="BriteErpDemo")
+    public WebElement BriteErpDemo;
+
+    @FindBy(linkText = "CRM")
+    public WebElement CRMButton;
+
     @FindBy(xpath = "//a[@data-menu-xmlid='crm.menu_crm_opportunities']")
     public WebElement pipelineLink;
 
     @FindBy(xpath = "//button[@class='btn btn-primary btn-sm o-kanban-button-new']")
     public WebElement createButton;
+
+    @FindBy(xpath = "//footer//button[1]")
+    public WebElement create;
 
     @FindBy(xpath = "//button[@class='btn btn-sm btn-default o_button_import']")
     public WebElement importButton;
@@ -51,12 +79,45 @@ public class CRMUserPipelinePage {
     public WebElement searchBoxFirstItem;
 
 
+//    public List<WebElement> getListOfDropDownMenu(){
+//        List<WebElement> websiteDropdownList = Driver.getDriver().findElements(
+//                By.xpath("//li[@class='dropdown active']//ul//li//a//span"));
+//        for (WebElement moduleName: websiteDropdownList) {
+//            System.out.println(moduleName.getText());
+//        }
+//        return websiteDropdownList;
+//    }
+
+
     public List<WebElement> getListOfHeaders(){
         List<WebElement> headers = Driver.getDriver().findElements(
                 By.xpath("//ul[@class='nav navbar-nav navbar-left oe_application_menu_placeholder']//li//a//span"));
         for (WebElement header:headers) {
-            System.out.println(header.getText());
+//            System.out.println(header.getText());
         }
         return headers;
     }
+
+    // Method for login to CRM module as user
+    public void loginAsUser() {
+
+        //        1.1.1 Open the URL
+        BriteErpDemo.click();
+//        1.1.2 Login using valid username and password as CRM user.
+        signIn.click();
+        email.sendKeys(ConfigurationReader.getProperty("CRMUserEmail"));
+        password.sendKeys(ConfigurationReader.getProperty("CRMUserPassword"));
+        loginButton.click();
+//        1.1.3 Click on CRM tab on top.
+        CRMButton.click();
+    }
+
+    public String randomQuantity() {
+        Random r = new Random();
+        int qtty = r.nextInt(2) + 1;
+        String rndmQuantity = (" " + qtty + " ").trim();
+
+        return rndmQuantity;
+    }
+
 }
