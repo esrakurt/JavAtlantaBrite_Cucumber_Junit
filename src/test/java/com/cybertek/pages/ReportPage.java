@@ -21,6 +21,11 @@ public class ReportPage {
     public WebElement ReportSalesChannel ;
 
 
+    //@FindBy(xpath = "(//li[@class=\"active\"])[3]")
+    @FindBy(css = ".breadcrumb>li")
+    public WebElement ReportPipelinePage;
+
+
 
     @FindBy(xpath = "//div//button[@class='btn btn-primary btn-sm dropdown-toggle']")
     public WebElement RPMeasures ;
