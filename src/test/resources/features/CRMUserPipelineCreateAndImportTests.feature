@@ -6,14 +6,14 @@ Feature: CRM User Pipeline Page Create and Import Functionalities and Qualified 
   Background:
     Given user on the pipeline page after login using valid credentials
 
-
+  @wip
   Scenario Outline: Create an Opportunity as User Test
     When Click on create button
     Then Enter name of new opportunity as "<opportunity>"
     Then Enter expected revenue
     Then Click on one of the priority stars
     And Click on create
-    Then Close driver
+#    Then Close driver
     Examples:
       | opportunity |
       | Sale 1      |
@@ -44,7 +44,6 @@ Feature: CRM User Pipeline Page Create and Import Functionalities and Qualified 
     Then Click on any opportunity under Qualified
     And Verify the the title includes expected title
 
-  @wip
   Scenario Outline:Changing Status Tests
     When Clear the search box by clicking the x
     Then Click on <order> opportunity under Qualified
@@ -54,7 +53,7 @@ Feature: CRM User Pipeline Page Create and Import Functionalities and Qualified 
     And Enter any reason to change the status
     Then Click on submit
     And Verify that the status has changed to lost
-    Then Close driver
+#    Then Close driver
   Examples:
     |order|
     | 1   |
@@ -66,7 +65,7 @@ Feature: CRM User Pipeline Page Create and Import Functionalities and Qualified 
 #    And Enter "password"
 #    Then Click on login button
     And Verify the module tabs contains "<moduleName>" module
-    Then Close driver
+#    Then Close driver
     Examples:
       | moduleName |
       | CRM        |
