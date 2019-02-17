@@ -140,28 +140,24 @@ public class CRMUserPipelineCreateAndImportTestsSteps {
         Assert.assertTrue(crmUserPipelinePage.importButton.getText().contains("Import"));
     }
 
-    //STEPS FOR Item Under Qualified Category
+    //STEPS FOR Item Under New Category
 
-    @Then("Click on any opportunity under Qualified")
-    public void click_on_any_opportunity_under_Qualified() {
-        qualifiedPage.opportunityUnderQualified.click();
+    @Then("Click on the {string} under New")
+    public void click_on_the_under_New(String newOppt) {
+        qualifiedPage.clickOpportunity(newOppt);
     }
 
-    @And("Verify the the title includes expected title")
-    public void verify_the_the_title_includes_expected_title() {
-        Assert.assertEquals(qualifiedPage.expectedTitleOfOpportunityUnderQualified.getText(),
-                qualifiedPage.actualTitleOfOpportunityUnderQualified.getText());
+    @Then("Verify the name of opportunity includes {string}")
+    public void verify_the_name_of_opportunity_includes(String expectedName) {
+        Assert.assertEquals(expectedName, qualifiedPage.actualNameOfOpportunity.getText());
     }
 
 
     //STEPS FOR Changing Status Tests
 
-    @Then("Click on {int} opportunity under Qualified")
-    public void click_on_opportunity_under_Qualified(Integer order) {
-        Assert.assertNotNull("Opportunity: \""+qualifiedPage.actualTitleOfOpportunityUnderQualified+"\" does not exist\n",
-                Driver.getDriver().findElement(
-                        By.xpath("(//div[@class='o_kanban_group ui-sortable o_kanban_has_progressbar'][2]//div[@class='oe_kanban_content'])["+ order+ "]")));
-        qualifiedPage.getOpportunityUnderQualified(order);
+    @Then("Click on {string} under New")
+    public void click_on_under_New(String string) {
+        qualifiedPage.clickOpportunity(string);
     }
 
     @Then("Click on Mark Won")
