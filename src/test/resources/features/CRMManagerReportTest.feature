@@ -1,4 +1,4 @@
-@wip
+#@wip
 Feature: Report Functinality
 
   Background:
