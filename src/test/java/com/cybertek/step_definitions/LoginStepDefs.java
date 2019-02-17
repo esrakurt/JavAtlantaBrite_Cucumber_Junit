@@ -19,7 +19,6 @@ public class LoginStepDefs {
         Driver.getDriver().get(ConfigurationReader.getProperty("url"));
         login.selectBriteErpDemo();
 
-
     }
 
     @When("user logs in using {string}")
