@@ -6,30 +6,39 @@ Feature: CRM User Pipeline Page Create and Import Functionalities and Qualified 
   Background:
     Given user on the pipeline page after login using valid credentials
 
-  @wip
+
   Scenario Outline: Create an Opportunity as User Test
     When Click on create button
     Then Enter name of new opportunity as "<opportunity>"
     Then Enter expected revenue
     Then Click on one of the priority stars
     And Click on create
-#    Then Close driver
     Examples:
       | opportunity |
       | Sale 1      |
       | Sale 2      |
 
-  Scenario: Change the opportunity information as user Test
-    When Click on recently created opportunity
+
+  Scenario Outline: Change the opportunity information as user Test
+    When Click on recently created "<oppt>"
     Then Click on edit button
     Then Clear the information
-    Then Enter new information "New Sale 2"
+    Then Enter new information "<title>"
     And Click on save button
+    Examples:
+      | oppt   | title      |
+      | Sale 1 | New Sale 1 |
+      | Sale 2 | New Sale 2 |
 
-  Scenario:Searching Opportunity Test
+  @wip
+  Scenario Outline:Searching Opportunity Test
     When Clear the search box by clicking the x
-    Then Enter the name of recently created opportunity "New Sale 2"
-    And Verify the name of the opportunity is matching with the name of opportunity created
+    Then Enter the name of recently created "<new opportunity>"
+    And Verify the name of the opportunity is matching with the name of "<new opportunity>"
+    Examples:
+    |new opportunity|
+    |New Sale 1     |
+    |New Sale 2     |
 
   Scenario:Importing a File Test
     When Click on import button
@@ -50,22 +59,16 @@ Feature: CRM User Pipeline Page Create and Import Functionalities and Qualified 
     And Click on Mark Won
     Then Verify that the status has changed to won
     And Click on Mark Lost
-    And Enter any reason to change the status
+    And Enter "<reason>" to change the status
     Then Click on submit
     And Verify that the status has changed to lost
-#    Then Close driver
-  Examples:
-    |order|
-    | 1   |
-    | 2   |
+    Examples:
+      | order | reason          |
+      | 1     | expensive       |
+      | 2     | decision change |
 
   Scenario Outline:Module Options Tests
-#    When Open URL
-#    Then Enter "email"
-#    And Enter "password"
-#    Then Click on login button
     And Verify the module tabs contains "<moduleName>" module
-#    Then Close driver
     Examples:
       | moduleName |
       | CRM        |
