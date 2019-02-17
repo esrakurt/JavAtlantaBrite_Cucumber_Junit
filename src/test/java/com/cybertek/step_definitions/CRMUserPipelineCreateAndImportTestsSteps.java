@@ -12,6 +12,7 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import cucumber.api.java.en_scouse.An;
 import org.junit.Assert;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 import java.util.ArrayList;
@@ -71,9 +72,9 @@ public class CRMUserPipelineCreateAndImportTestsSteps {
 
     //STEPS FOR Change the opportunity information as user Test
 
-    @When("Click on recently created opportunity")
-    public void click_on_recently_created_opportunity() {
-        crmUserPipelineChangeOpportunityInfoPage.newCreatedOpportunity.click();
+    @When("Click on recently created {string}")
+    public void click_on_recently_created(String opptName) {
+        crmUserPipelineChangeOpportunityInfoPage.getTheNameOfNewCreatedOpportunity(opptName);
     }
 
     @Then("Click on edit button")
@@ -87,8 +88,8 @@ public class CRMUserPipelineCreateAndImportTestsSteps {
     }
 
     @Then("Enter new information {string}")
-    public void enter_new_information(String string) {
-        crmUserPipelineChangeOpportunityInfoPage.infoNeededToChange.sendKeys("New Sale 2");
+    public void enter_new_information(String title) {
+        crmUserPipelineChangeOpportunityInfoPage.infoNeededToChange.sendKeys(title);
     }
 
     @Then("Click on save button")
@@ -103,15 +104,15 @@ public class CRMUserPipelineCreateAndImportTestsSteps {
         crmUserPipelinePage.xIconOnSearchBox.click();
     }
 
-    @Then("Enter the name of recently created opportunity {string}")
-    public void enter_the_name_of_recently_created_opportunity(String string) {
-        crmUserPipelinePage.searchBox.sendKeys("New Sale 2");
+    @Then("Enter the name of recently created {string}")
+    public void enter_the_name_of_recently_created_opportunity(String newOppt) {
+        crmUserPipelinePage.searchBox.sendKeys(newOppt);
     }
 
-    @Then("Verify the name of the opportunity is matching with the name of opportunity created")
-    public void verify_the_name_of_the_opportunity_is_matching_with_the_name_of_opportunity_created() {
+    @Then("Verify the name of the opportunity is matching with the name of {string}")
+    public void verify_the_name_of_the_opportunity_is_matching_with_the_name_of(String string) {
         String actualName = crmUserPipelinePage.searchBoxFirstItem.getText();
-        Assert.assertTrue(actualName.contains("New Sale 2"));
+        Assert.assertTrue(actualName.contains(string));
     }
 
     //STEPS FOR Importing a File Test
@@ -157,6 +158,9 @@ public class CRMUserPipelineCreateAndImportTestsSteps {
 
     @Then("Click on {int} opportunity under Qualified")
     public void click_on_opportunity_under_Qualified(Integer order) {
+        Assert.assertNotNull("Opportunity: \""+qualifiedPage.actualTitleOfOpportunityUnderQualified+"\" does not exist\n",
+                Driver.getDriver().findElement(
+                        By.xpath("(//div[@class='o_kanban_group ui-sortable o_kanban_has_progressbar'][2]//div[@class='oe_kanban_content'])["+ order+ "]")));
         qualifiedPage.getOpportunityUnderQualified(order);
     }
 
@@ -175,9 +179,9 @@ public class CRMUserPipelineCreateAndImportTestsSteps {
         qualifiedPage.markLost.click();
     }
 
-    @Then("Enter any reason to change the status")
-    public void enter_any_reason_to_change_the_status() {
-        qualifiedPage.reasonForLost.sendKeys("expensive");
+    @Then("Enter {string} to change the status")
+    public void enter_to_change_the_status(String string) {
+        qualifiedPage.reasonForLost.sendKeys(string);
     }
 
     @Then("Click on submit")
