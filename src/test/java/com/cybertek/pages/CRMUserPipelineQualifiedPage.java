@@ -1,6 +1,7 @@
 package com.cybertek.pages;
 
 import com.cybertek.utilities.Driver;
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -14,14 +15,8 @@ public class CRMUserPipelineQualifiedPage {
         PageFactory.initElements(Driver.getDriver(), this);
     }
 
-    @FindBy(xpath = "(//div[@class='o_kanban_group ui-sortable o_kanban_has_progressbar'][2]//div[@class='oe_kanban_content'])[2]")
-    public WebElement opportunityUnderQualified;
-
-    @FindBy(xpath = "(//div[@class='o_kanban_group ui-sortable o_kanban_has_progressbar'][2]//div[@class='oe_kanban_content'])[2]//div//strong//span")
-    public WebElement expectedTitleOfOpportunityUnderQualified;
-
     @FindBy(xpath = "//h1//span[@class='o_field_char o_field_widget o_required_modifier']")
-    public WebElement actualTitleOfOpportunityUnderQualified;
+    public WebElement actualNameOfOpportunity;
 
     @FindBy(xpath = "//button[@class='btn btn-sm btn-default oe_highlight'][2]")
     public WebElement markWon;
@@ -42,11 +37,20 @@ public class CRMUserPipelineQualifiedPage {
     public WebElement submitOnReason;
 
 
-    public void getOpportunityUnderQualified (Integer order){
+    public void clickOpportunity (String nameOfOpportunity){
         WebElement opptUnderQualified = Driver.getDriver().findElement(
-                By.xpath("(//div[@class='o_kanban_group ui-sortable o_kanban_has_progressbar'][2]//div[@class='oe_kanban_content'])["+ order+ "]"));
-        opptUnderQualified.click();
+                By.xpath("//div[@data-id='1']//div[@class='oe_kanban_content']//span[.='"+nameOfOpportunity+"']"));
+        if (opptUnderQualified == null){
+            Assert.fail("There is no such element found.");
+        }else{
+            opptUnderQualified.click();
+        }
+    }
 
+    public String getNameOfOpportunity(String nameOfOpportunity){
+        String actualNameOfOpportunity = Driver.getDriver().findElement(
+                By.xpath("//div[@data-id='1']//div[@class='oe_kanban_content']//span[.='"+nameOfOpportunity+"']")).getText();
+        return actualNameOfOpportunity;
     }
 
 }
