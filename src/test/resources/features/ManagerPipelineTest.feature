@@ -1,4 +1,4 @@
-
+@wip
 Feature: Manager PipeLine Page
 
   As a CRM Manager, I should be able to navigate to CRM Module
@@ -23,7 +23,7 @@ Feature: Manager PipeLine Page
     Scenario: Graph View Test
     And Manager should be able to see Graph view
 
-  @wip
+
   Scenario Outline: Manager should be able to see different Graphs
 
     Then Manager should be display <graphs>

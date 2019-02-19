@@ -38,12 +38,8 @@ public class ManagerPipelineTestSteps {
         pipelinePage.graphView.click();
     }
 
-
-
     @Then("Manager should be display Days to Assign")
     public void manager_should_be_display_Days_to_Assign() {
-//        pipelinePage.graphView.click();
-//        pipelinePage.measuresButton.click();
         pipelinePage.gotoGraphAndClickMeasures();
         pipelinePage.daysToAssign.click();
         String actualDaysToAssignGraphTitle = pipelinePage.daysToAssignHeader.getText();
@@ -63,16 +59,28 @@ public class ManagerPipelineTestSteps {
     @Then("Manager should be display Bounce")
     public void manager_should_be_display_Bounce() {
         pipelinePage.gotoGraphAndClickMeasures();
+        pipelinePage.bounceButton.click();
+        String actualBounceTitle = pipelinePage.bounceHeader.getText();
+        String expectedBounceTitle = "Bounce";
+        Assert.assertEquals(actualBounceTitle,expectedBounceTitle);
     }
 
     @Then("Manager should be display Probability")
     public void manager_should_be_display_Probability() {
         pipelinePage.gotoGraphAndClickMeasures();
+        pipelinePage.probabilityButton.click();
+        String actualProbabilityTitle = pipelinePage.probabilityHeader.getText();
+        String expectedProbabilityTitle = "Probability";
+        Assert.assertEquals(actualProbabilityTitle,expectedProbabilityTitle);
     }
 
     @Then("Manager should be display Expected Revenue")
     public void manager_should_be_display_Expected_Revenue() {
         pipelinePage.gotoGraphAndClickMeasures();
+        pipelinePage.expectedRevenueButton.click();
+        String actualExpectedRevenueTitle = pipelinePage.expectedRevenueHeader.getText();
+        String expectedExpectedRevenueTitle = "Expected Revenue";
+        Assert.assertEquals(actualExpectedRevenueTitle,expectedExpectedRevenueTitle);
     }
 
 
