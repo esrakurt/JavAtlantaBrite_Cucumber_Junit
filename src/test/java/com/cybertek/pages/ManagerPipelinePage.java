@@ -46,31 +46,23 @@ public class ManagerPipelinePage {
     @FindBy(xpath = "(//*[.='Days to Close'])[6]")
     public WebElement daysToCloseHeader;
 
+    @FindBy(xpath = "//a[.='Bounce']")
+    public WebElement bounceButton;
 
+    @FindBy(xpath = "(//*[.='Bounce'])[6]")
+    public WebElement bounceHeader;
 
+    @FindBy(xpath = "//a[.='Probability']")
+    public WebElement probabilityButton;
 
+    @FindBy(xpath = "(//*[.='Probability'])[6]")
+    public WebElement probabilityHeader;
 
-//    Select s = new Select(dropDownMenu);
-//
-//    public void selectDaysToAssign(){
-//        s.selectByVisibleText("Days To Assign");
-//    }
-//
-//    public void selectDaysToClose(){
-//        s.selectByVisibleText("Days To Close");
-//    }
-//
-//    public void selectBounce(){
-//        s.selectByVisibleText("Bounce");
-//    }
-//
-//    public void selectProbability(){
-//        s.selectByVisibleText("Probability");
-//    }
-//
-//    public void selectExpectedRevenue(){
-//        s.selectByVisibleText("Expected Revenue");
-//    }
+    @FindBy(xpath = "//a[.='Expected Revenue']")
+    public WebElement expectedRevenueButton;
+
+    @FindBy(xpath = "(//*[.='Expected Revenue'])[6]")
+    public WebElement expectedRevenueHeader;
 
     @FindBy(linkText = "Pipeline")
     public WebElement pipelineLink;
