@@ -22,9 +22,6 @@ public class CRMUserPipelinePage {
     @FindBy(id = "password")
     public WebElement password;
 
-//    @FindBy(xpath = "//input[@name='csrf_token']")
-//    public WebElement hiddenMessage;
-
     @FindBy(xpath = "//*[@type='submit']")
     public WebElement loginButton;
 
@@ -78,22 +75,10 @@ public class CRMUserPipelinePage {
     @FindBy(xpath = "(//div//ul[@class='dropdown-menu o_searchview_autocomplete']//li[1])")
     public WebElement searchBoxFirstItem;
 
-
-//    public List<WebElement> getListOfDropDownMenu(){
-//        List<WebElement> websiteDropdownList = Driver.getDriver().findElements(
-//                By.xpath("//li[@class='dropdown active']//ul//li//a//span"));
-//        for (WebElement moduleName: websiteDropdownList) {
-//            System.out.println(moduleName.getText());
-//        }
-//        return websiteDropdownList;
-//    }
-
-
     public List<WebElement> getListOfHeaders(){
         List<WebElement> headers = Driver.getDriver().findElements(
                 By.xpath("//ul[@class='nav navbar-nav navbar-left oe_application_menu_placeholder']//li//a//span"));
         for (WebElement header:headers) {
-//            System.out.println(header.getText());
         }
         return headers;
     }
@@ -101,20 +86,17 @@ public class CRMUserPipelinePage {
     // Method for login to CRM module as user
     public void loginAsUser() {
 
-        //        1.1.1 Open the URL
         BriteErpDemo.click();
-//        1.1.2 Login using valid username and password as CRM user.
         signIn.click();
         email.sendKeys(ConfigurationReader.getProperty("CRMUserEmail"));
         password.sendKeys(ConfigurationReader.getProperty("CRMUserPassword"));
         loginButton.click();
-//        1.1.3 Click on CRM tab on top.
         CRMButton.click();
     }
 
     public String randomQuantity() {
         Random r = new Random();
-        int qtty = r.nextInt(2) + 1;
+        int qtty = r.nextInt(999) + 1;
         String rndmQuantity = (" " + qtty + " ").trim();
 
         return rndmQuantity;
