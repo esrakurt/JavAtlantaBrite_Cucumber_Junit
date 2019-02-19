@@ -8,6 +8,8 @@ import org.junit.Assert;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.util.List;
+
 public class CRMManagerReportTestSteps {
 
     ReportPage reportPage=new ReportPage();
@@ -37,8 +39,27 @@ public class CRMManagerReportTestSteps {
     }
 
 
+    @Then("user should be able to view Reporting-Pipeline Analysis page following options:")
+    public void user_should_be_able_to_view_Reporting_Pipeline_Analysis_page_following_options(List<String> options) {
+        WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 20);
+        wait.until(ExpectedConditions.elementToBeClickable(reportPage.ReportPipeline));
+        //BrowserUtils.waitForVisibility(reportPage.ReportPipeline, 20);
+        reportPage.ReportPipeline.click();
 
-    @Then("user should be able to view Reporting-Pipeline Analysis-{string}")
+        reportPage.RPMeasures.click();
+
+        for(int i=0; i<options.size();i++) {
+            switch (options.get(i)) {
+                case "Count":
+                    reportPage.RPMeasuresCount.click();
+                    break;
+
+            }
+        }
+
+    }
+
+     @Then("user should be able to view Reporting-Pipeline Analysis-{string}")
     public void user_should_be_able_to_view_Reporting_Pipeline_Analysis(String type) {
         WebDriverWait wait=new WebDriverWait(Driver.getDriver(), 20);
         wait.until(ExpectedConditions.elementToBeClickable(reportPage.ReportPipeline));
@@ -48,10 +69,7 @@ public class CRMManagerReportTestSteps {
         reportPage.RPMeasures.click();
 
         switch (type){
-            case "Count":
-                reportPage.RPMeasuresCount.click();
-                break;
-            case"Delay to Assign":
+            case "Delay to Assign":
                 reportPage.RPMeasuresDelayToAssign.click();
                 break;
             case"Delay to Close":
