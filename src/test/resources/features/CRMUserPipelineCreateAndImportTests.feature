@@ -30,7 +30,6 @@ Feature: CRM User Pipeline Page Create and Import Functionalities and Qualified 
       | Sale 1 | New Sale 1 |
       | Sale 2 | New Sale 2 |
 
-  @wip
   Scenario Outline:Searching Opportunity Test
     When Clear the search box by clicking the x
     Then Enter the name of recently created "<new opportunity>"
