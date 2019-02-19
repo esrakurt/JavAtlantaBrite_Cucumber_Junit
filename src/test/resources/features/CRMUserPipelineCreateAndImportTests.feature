@@ -18,6 +18,15 @@ Feature: CRM User Pipeline Page Create and Import Functionalities and Qualified 
       | Sale 1      |
       | Sale 2      |
 
+  @wip (order = 2)
+  Scenario Outline:Item Under New Category
+    When Clear the search box by clicking the x
+    Then Click on the "<new created opportunity>" under New
+    Then Verify the name of opportunity includes "<new created opportunity>"
+    Examples:
+      | new created opportunity |
+      | Sale 1                  |
+      | Sale 2                  |
 
   Scenario Outline: Change the opportunity information as user Test
     When Click on recently created "<oppt>"
@@ -30,32 +39,20 @@ Feature: CRM User Pipeline Page Create and Import Functionalities and Qualified 
       | Sale 1 | New Sale 1 |
       | Sale 2 | New Sale 2 |
 
-  @wip
+
   Scenario Outline:Searching Opportunity Test
     When Clear the search box by clicking the x
     Then Enter the name of recently created "<new opportunity>"
     And Verify the name of the opportunity is matching with the name of "<new opportunity>"
     Examples:
-    |new opportunity|
-    |New Sale 1     |
-    |New Sale 2     |
+      | new opportunity |
+      | New Sale 1      |
+      | New Sale 2      |
 
-  Scenario:Importing a File Test
-    When Click on import button
-    Then Verify the the title includes Import a File
-    And Click on Load File button.
-
-  Scenario:Verifying Create and Import Test
-    When Verify the create and import buttons are existing.
-
-  Scenario:Item Under Qualified Category
-    When Clear the search box by clicking the x
-    Then Click on any opportunity under Qualified
-    And Verify the the title includes expected title
 
   Scenario Outline:Changing Status Tests
     When Clear the search box by clicking the x
-    Then Click on <order> opportunity under Qualified
+    Then Click on "<opportunity>" under New
     And Click on Mark Won
     Then Verify that the status has changed to won
     And Click on Mark Lost
@@ -63,9 +60,20 @@ Feature: CRM User Pipeline Page Create and Import Functionalities and Qualified 
     Then Click on submit
     And Verify that the status has changed to lost
     Examples:
-      | order | reason          |
-      | 1     | expensive       |
-      | 2     | decision change |
+      | opportunity | reason          |
+      | New Sale 1  | expensive       |
+      | New Sale 2  | decision change |
+
+
+  Scenario:Importing a File Test
+    When Click on import button
+    Then Verify the the title includes Import a File
+    And Click on Load File button.
+
+
+  Scenario:Verifying Create and Import Test
+    When Verify the create and import buttons are existing.
+
 
   Scenario Outline:Module Options Tests
     And Verify the module tabs contains "<moduleName>" module
