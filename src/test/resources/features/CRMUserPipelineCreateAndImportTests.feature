@@ -6,7 +6,7 @@ Feature: CRM User Pipeline Page Create and Import Functionalities and Qualified 
   Background:
     Given user on the pipeline page after login using valid credentials
 
-  @wip (order = 1)
+
   Scenario Outline: Create an Opportunity as User Test
     When Click on create button
     Then Enter name of new opportunity as "<opportunity>"
@@ -28,7 +28,6 @@ Feature: CRM User Pipeline Page Create and Import Functionalities and Qualified 
       | Sale 1                  |
       | Sale 2                  |
 
-  @wip (order = 3)
   Scenario Outline: Change the opportunity information as user Test
     When Click on recently created "<oppt>"
     Then Click on edit button

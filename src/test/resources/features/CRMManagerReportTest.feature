@@ -1,4 +1,3 @@
-
 Feature: Report Functinality
 
   Background:
@@ -13,13 +12,19 @@ Feature: Report Functinality
   Scenario: CRM Manager should be able view Reporting/Pipeline Analysis/Total Revenue
     And user should be able to view Reporting-Pipeline Analysis-Total Revenue
 
-  Scenario Outline:  CRM Manager should be able view Reporting/Pipeline Analysis Measure Options
+
+
+  Scenario:CRM Manager should be able view Reporting/Pipeline Analysis Measure Options List Method
+    And user should be able to view Reporting-Pipeline Analysis page following options:
+      | Count |
+
+  @wip
+  Scenario Outline:  CRM Manager should be able view Reporting/Pipeline Analysis Measure <option>
 
     And user should be able to view Reporting-Pipeline Analysis-"<option>"
 
     Examples:
       | option               |
-      | Count                |
       | Delay to Assign      |
       | Delay to Close       |
       | Overpassed Deadline  |
@@ -33,4 +38,8 @@ Feature: Report Functinality
 
   Scenario: CRM Manager should be able view Reporting/SalesChannel Analysis page
     And user should be able to view Reporting-SalesChannel Analysis page
+
+
+
+
 
