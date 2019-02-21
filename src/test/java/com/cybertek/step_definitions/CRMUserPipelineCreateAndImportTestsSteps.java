@@ -6,6 +6,7 @@ import com.cybertek.pages.CRMUserPipelineQualifiedPage;
 import com.cybertek.pages.LoginPage;
 import com.cybertek.utilities.ConfigurationReader;
 import com.cybertek.utilities.Driver;
+import com.cybertek.utilities.ExcelUtil;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
@@ -48,6 +49,18 @@ public class CRMUserPipelineCreateAndImportTestsSteps {
     public void enter_name_of_new_opportunity_as(String string) {
         crmUserPipelinePage.opportunityTitle.sendKeys(string);
     }
+
+//    @Then("Enter name of new opportunity as {string}")
+//    public void enter_name_of_new_opportunity_as(String oppt) {
+//
+//        ExcelUtil excelUtil = new ExcelUtil("./src/test/resources/testData/CRMUserPipelineData.xlsx", "opportunityCreate");
+//
+//        for (int i=0; i<excelUtil.columnCount(); i++){
+//            oppt = excelUtil.getCellData(0, i);
+//            System.out.println(oppt);
+//            crmUserPipelinePage.opportunityTitle.sendKeys(oppt);
+//        }
+//    }
 
     @Then("Enter expected revenue")
     public void enter_expected_revenue() {
