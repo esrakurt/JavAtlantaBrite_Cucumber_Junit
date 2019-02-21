@@ -6,7 +6,6 @@ Feature: CRM User Pipeline Page Create and Import Functionalities and Qualified 
   Background:
     Given user on the pipeline page after login using valid credentials
 
-
   Scenario Outline: Create an Opportunity as User Test
     When Click on create button
     Then Enter name of new opportunity as "<opportunity>"
