@@ -19,15 +19,13 @@ public class LoginStepDefs {
         Driver.getDriver().get(ConfigurationReader.getProperty("url"));
         login.selectBriteErpDemo();
 
-
-
     }
 
     @When("user logs in using {string}")
     public void user_logs_in_using(String role) {
-        if (role.equalsIgnoreCase("manager")){
-        login.login(ConfigurationReader.getProperty("CRMManagerEmail"), ConfigurationReader.getProperty("CRMManagerPassword"));
-        }else if((role.equalsIgnoreCase("user"))){
+        if (role.equalsIgnoreCase("manager")) {
+            login.login(ConfigurationReader.getProperty("CRMManagerEmail"), ConfigurationReader.getProperty("CRMManagerPassword"));
+        } else if ((role.equalsIgnoreCase("user"))) {
             login.login(ConfigurationReader.getProperty("CRMUserEmail"), ConfigurationReader.getProperty("CRMUserPassword"));
         }
     }
@@ -36,6 +34,7 @@ public class LoginStepDefs {
     public void crm_module_should_be_displayed() {
         login.clickCRModule();
     }
+
 
 
 
