@@ -18,11 +18,12 @@ import org.openqa.selenium.WebElement;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class CRMUserPipelineCreateAndImportTestsSteps {
 
     CRMUserPipelinePage crmUserPipelinePage = new CRMUserPipelinePage();
-    CRMUserPipelineChangeOpportunityInfoPage  crmUserPipelineChangeOpportunityInfoPage = new CRMUserPipelineChangeOpportunityInfoPage();
+    CRMUserPipelineChangeOpportunityInfoPage crmUserPipelineChangeOpportunityInfoPage = new CRMUserPipelineChangeOpportunityInfoPage();
     CRMUserPipelineQualifiedPage qualifiedPage = new CRMUserPipelineQualifiedPage();
     LoginPage loginPage = new LoginPage();
 
@@ -49,18 +50,6 @@ public class CRMUserPipelineCreateAndImportTestsSteps {
     public void enter_name_of_new_opportunity_as(String string) {
         crmUserPipelinePage.opportunityTitle.sendKeys(string);
     }
-
-//    @Then("Enter name of new opportunity as {string}")
-//    public void enter_name_of_new_opportunity_as(String oppt) {
-//
-//        ExcelUtil excelUtil = new ExcelUtil("./src/test/resources/testData/CRMUserPipelineData.xlsx", "opportunityCreate");
-//
-//        for (int i=0; i<excelUtil.columnCount(); i++){
-//            oppt = excelUtil.getCellData(0, i);
-//            System.out.println(oppt);
-//            crmUserPipelinePage.opportunityTitle.sendKeys(oppt);
-//        }
-//    }
 
     @Then("Enter expected revenue")
     public void enter_expected_revenue() {
@@ -205,17 +194,38 @@ public class CRMUserPipelineCreateAndImportTestsSteps {
 
     //STEPS FOR Module Options Tests
 
+//    @And("Verify the module tabs contains {string} module")
+//    public void verify_the_module_tabs_contains_module(String moduleName) {
+//        List<WebElement> listOfModules = crmUserPipelinePage.getListOfHeaders();
+//        List<String> allModules = new ArrayList<>();
+//        for (WebElement module : listOfModules) {
+//            allModules.add(module.getText());
+//        }
+//        System.out.println(allModules);
+//
+//        Assert.assertTrue(allModules.contains(moduleName));
+//    }
+
     @And("Verify the module tabs contains {string} module")
     public void verify_the_module_tabs_contains_module(String moduleName) {
-        List<WebElement> listOfModules = crmUserPipelinePage.getListOfHeaders();
-        List<String> allModules = new ArrayList<>();
-        for (WebElement module : listOfModules) {
-            allModules.add(module.getText());
-        }
-        System.out.println(allModules);
-            Assert.assertTrue(allModules.contains(moduleName));
+        ExcelUtil excelUtil = new ExcelUtil("./src/test/resources/testData/CRMUserPipelineData.xlsx", "modules");
+
+        List<Map<String, String>> expectedModules = excelUtil.getDataList();
+        for (Map<String, String> expectedModule : expectedModules) {
+            moduleName = expectedModule.get("module name");
+            System.out.println(moduleName);
+
         }
 
+        List<WebElement> listOfActualModules = crmUserPipelinePage.getListOfHeaders();
+        List<String> allModules = new ArrayList<>();
+        for (WebElement module : listOfActualModules) {
+            allModules.add(module.getText());
+        }
+            System.out.println(allModules);
+
+        Assert.assertTrue(allModules.contains(moduleName));
+    }
 
 
 }

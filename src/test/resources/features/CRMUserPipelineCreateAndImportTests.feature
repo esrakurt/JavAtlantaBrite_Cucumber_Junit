@@ -6,7 +6,7 @@ Feature: CRM User Pipeline Page Create and Import Functionalities and Qualified 
   Background:
     Given user on the pipeline page after login using valid credentials
 
-  @wip
+
   Scenario Outline: Create an Opportunity as User Test
     When Click on create button
     Then Enter name of new opportunity as "<opportunity>"
@@ -15,8 +15,8 @@ Feature: CRM User Pipeline Page Create and Import Functionalities and Qualified 
     And Click on create
     Examples:
       | opportunity |
-      | oppt 1      |
-      | oppt 2      |
+      | Sale 1      |
+      | Sale 2      |
 
 
   Scenario Outline:Item Under New Category
@@ -75,12 +75,12 @@ Feature: CRM User Pipeline Page Create and Import Functionalities and Qualified 
     When Verify the create and import buttons are existing.
 
 
+  @wip
   Scenario Outline:Module Options Tests
-    And Verify the module tabs contains "<moduleName>" module
+    And Verify the module tabs contains "<moduleNames>" module
     Examples:
-      | moduleName |
-      | CRM        |
-      | Discuss    |
-      | Calendar   |
+      | moduleNames |
+      | module      |
+
 
 
