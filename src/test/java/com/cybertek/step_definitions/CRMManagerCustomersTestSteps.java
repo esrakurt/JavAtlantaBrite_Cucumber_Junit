@@ -1,6 +1,7 @@
 package com.cybertek.step_definitions;
 
 import com.cybertek.pages.CustomersPage;
+import com.cybertek.utilities.BrowserUtils;
 import com.cybertek.utilities.ConfigurationReader;
 import com.cybertek.utilities.Driver;
 import cucumber.api.java.en.*;
@@ -8,6 +9,8 @@ import org.junit.Assert;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.util.List;
 
 public class CRMManagerCustomersTestSteps {
 
@@ -17,8 +20,8 @@ public class CRMManagerCustomersTestSteps {
 
     @Given("navigate to URL and select BriteErpDemo database")
     public void navigate_to_URL_and_select_BriteErpDemo_database() {
-        Driver.getDriver().get(ConfigurationReader.getProperty("url"));
-        cp.BriteErpDemo.click();
+        Driver.getDriver().get("http://54.148.96.210/web/login");  //This is new url provided later on
+        //cp.BriteErpDemo.click();   We don't need this action anymore
     }
 
 
@@ -129,9 +132,9 @@ public class CRMManagerCustomersTestSteps {
     }
 
     @When("click on Company button")
-    public void click_on_Company_button() {
+    public void click_on_Company_button() throws InterruptedException {
         cp.radioButtonCompany.click();
-        wait.until(ExpectedConditions.invisibilityOf(cp.companyDropdown));
+        Thread.sleep(2000);
     }
 
     @Then("Individual button will be un-selected")
@@ -142,6 +145,58 @@ public class CRMManagerCustomersTestSteps {
     @Then("Company button will be selected")
     public void company_button_will_be_selected() {
         Assert.assertTrue(cp.radioButtonCompany.isSelected());
+    }
+
+
+    @When("total number of customer cards should be {int}")
+    public void total_number_of_customer_cards_should_be(Integer int1) throws InterruptedException {
+        Thread.sleep(2000);
+        Assert.assertTrue(cp.nameListMakerKanbanView().size() == 80);
+    }
+
+    @When("click on right arrow button")
+    public void click_on_right_arrow_button() throws InterruptedException {
+    cp.rightArrowButton.click();
+    Thread.sleep(3000);
+    }
+
+    @Then("verify that number interval {string} displayed")
+    public void verify_that_number_interval_displayed(String string) {
+        Assert.assertEquals(cp.numberInterval2.getText(), "81-160");
+    }
+
+    List<String> namesList80First;
+    @Then("save all customer names on existing cards")
+    public void save_all_customer_names_on_existing_cards() {
+    namesList80First= cp.nameListMakerKanbanView();
+    }
+
+    @When("click on left arrow button")
+    public void click_on_left_arrow_button() {
+    cp.leftArrowButton.click();
+    }
+
+    List<String> namesList80Second;
+    @Then("save all customer names on existing cards again")
+    public void save_all_customer_names_on_existing_cards_again() throws InterruptedException {
+    Thread.sleep(3000);
+    namesList80Second=cp.nameListMakerKanbanView();
+    }
+
+    List<String> namesList80inListView;
+    @Then("save all customer names on existing cards in List view")
+    public void save_all_customer_names_on_existing_cards_in_List_view() {
+    namesList80inListView = cp.nameListMakerListView();
+    }
+
+    @Then("verify that two name lists match")
+    public void verify_that_two_name_lists_match() {
+    Assert.assertEquals(namesList80First, namesList80Second);
+    }
+
+    @Then("verify that two name lists are matching")
+    public void verify_that_two_name_lists_are_matching() {
+    Assert.assertEquals(namesList80First, namesList80inListView);
     }
 
 }

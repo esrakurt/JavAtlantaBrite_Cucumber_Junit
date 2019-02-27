@@ -1,9 +1,7 @@
 package com.cybertek.pages;
 
-import com.cybertek.utilities.ConfigurationReader;
 import com.cybertek.utilities.Driver;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -17,6 +15,8 @@ public class CustomersPage {
         PageFactory.initElements(Driver.getDriver(), this);
     }
 
+    @FindBy(xpath = "//input[@placeholder='Company']")
+    public WebElement companyDropdown;
 
     @FindBy(xpath = "//a[@data-action-id='365'][1]")
     public WebElement CRM1;
@@ -40,26 +40,8 @@ public class CustomersPage {
     public WebElement numberInterval2;
 
 
-    public List<String> nameListMakerKanbanView(){
-        List<WebElement> customerCards = Driver.getDriver().findElements(By.xpath("//div[@class='oe_kanban_global_click o_res_partner_kanban o_kanban_record']/div[2]/strong/span"));
-        List<String> namesList80= new ArrayList<>();
-        for(WebElement a : customerCards){
-            namesList80.add(a.getText());
-        }
-        return namesList80;
-    }
-
-    public List<String> nameListMakerListView(){
-        List<WebElement> customerCards = Driver.getDriver().findElements(By.xpath("//td[@class='o_data_cell o_readonly_modifier']"));
-        List<String> namesList80= new ArrayList<>();
-        for(WebElement a : customerCards){
-            namesList80.add(a.getText());
-        }
-        return namesList80;
-    }
-
-
     // ---------------NEW ONES-------------------
+
 
     @FindBy(xpath = "//a[@class='list-group-item'][2]")
     public WebElement BriteErpDemo ;
@@ -109,8 +91,24 @@ public class CustomersPage {
     @FindBy(xpath = "//div[@class='modal-footer']/button[1]")
     public WebElement warningOkButton;
 
-    @FindBy(xpath = "//input[@placeholder='Company']")
-    public WebElement companyDropdown;
+
+    public List<String> nameListMakerKanbanView(){
+        List<WebElement> customerCards = Driver.getDriver().findElements(By.xpath("//div[@class='oe_kanban_global_click o_res_partner_kanban o_kanban_record']/div[2]/strong/span"));
+        List<String> namesList80= new ArrayList<>();
+        for(WebElement a : customerCards){
+            namesList80.add(a.getText());
+        }
+        return namesList80;
+    }
+
+    public List<String> nameListMakerListView(){
+        List<WebElement> customerCards = Driver.getDriver().findElements(By.xpath("//td[@class='o_data_cell o_readonly_modifier']"));
+        List<String> namesList80= new ArrayList<>();
+        for(WebElement a : customerCards){
+            namesList80.add(a.getText());
+        }
+        return namesList80;
+    }
 
 
 }
