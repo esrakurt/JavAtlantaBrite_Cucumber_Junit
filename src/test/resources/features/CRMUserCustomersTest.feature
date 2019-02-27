@@ -11,7 +11,7 @@ Feature: Customers page
     When User clicks on the Customers page
     Then User should be able to see Customers page.
 
-  @wip
+#  @wip
   Scenario Outline: Create new customer profile
     Given User on the Customers page
     When User clicks on create button

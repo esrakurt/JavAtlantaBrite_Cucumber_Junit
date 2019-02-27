@@ -1,7 +1,4 @@
-<<<<<<< HEAD
 
-=======
->>>>>>> master
 Feature: login functionality
 
   Scenario: user login

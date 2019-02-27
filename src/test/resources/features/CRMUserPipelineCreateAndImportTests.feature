@@ -28,6 +28,7 @@ Feature: CRM User Pipeline Page Create and Import Functionalities and Qualified 
       | Sale 1                  |
       | Sale 2                  |
 
+
   Scenario Outline: Change the opportunity information as user Test
     When Click on recently created "<oppt>"
     Then Click on edit button
@@ -75,7 +76,7 @@ Feature: CRM User Pipeline Page Create and Import Functionalities and Qualified 
     When Verify the create and import buttons are existing.
 
 
-  @wip
+//  @wip
   Scenario Outline:Module Options Tests
     And Verify the module tabs contains "<moduleNames>" module
     Examples:
