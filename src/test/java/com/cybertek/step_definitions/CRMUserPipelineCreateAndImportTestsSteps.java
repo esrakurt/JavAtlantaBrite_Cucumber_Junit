@@ -33,7 +33,7 @@ public class CRMUserPipelineCreateAndImportTestsSteps {
     @Given("user on the pipeline page after login using valid credentials")
     public void user_on_the_pipeline_page_after_login_using_valid_credentials() {
         Driver.getDriver().get(ConfigurationReader.getProperty("url"));
-        crmUserPipelinePage.BriteErpDemo.click();
+        //crmUserPipelinePage.BriteErpDemo.click();
         crmUserPipelinePage.signIn.click();
         crmUserPipelinePage.email.sendKeys(ConfigurationReader.getProperty("CRMUserEmail"));
         crmUserPipelinePage.password.sendKeys(ConfigurationReader.getProperty("CRMUserPassword"));
