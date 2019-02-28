@@ -27,18 +27,18 @@ public class CRMUserPipelineCreateAndImportTestsSteps {
     CRMUserPipelineQualifiedPage qualifiedPage = new CRMUserPipelineQualifiedPage();
     LoginPage loginPage = new LoginPage();
 
+
     //STEPS FOR Create an Opportunity as User Test
 
     @Given("user on the pipeline page after login using valid credentials")
     public void user_on_the_pipeline_page_after_login_using_valid_credentials() {
         Driver.getDriver().get(ConfigurationReader.getProperty("url"));
-        crmUserPipelinePage.BriteErpDemo.click();
+        //crmUserPipelinePage.BriteErpDemo.click();
         crmUserPipelinePage.signIn.click();
         crmUserPipelinePage.email.sendKeys(ConfigurationReader.getProperty("CRMUserEmail"));
         crmUserPipelinePage.password.sendKeys(ConfigurationReader.getProperty("CRMUserPassword"));
         crmUserPipelinePage.loginButton.click();
         crmUserPipelinePage.CRMButton.click();
-//        crmUserPipelinePage.loginAsUser();
     }
 
     @When("Click on create button")
@@ -72,6 +72,7 @@ public class CRMUserPipelineCreateAndImportTestsSteps {
         Driver.closeDriver();
     }
 
+
     //STEPS FOR Change the opportunity information as user Test
 
     @When("Click on recently created {string}")
@@ -99,6 +100,7 @@ public class CRMUserPipelineCreateAndImportTestsSteps {
         crmUserPipelineChangeOpportunityInfoPage.saveButton.click();
     }
 
+
     //STEPS FOR Searching Opportunity Test
 
     @When("Clear the search box by clicking the x")
@@ -117,6 +119,7 @@ public class CRMUserPipelineCreateAndImportTestsSteps {
         Assert.assertTrue(actualName.contains(string));
     }
 
+
     //STEPS FOR Importing a File Test
 
     @When("Click on import button")
@@ -134,6 +137,7 @@ public class CRMUserPipelineCreateAndImportTestsSteps {
         crmUserPipelinePage.loadFile.click();
     }
 
+
     //STEPS FOR Importing a File Test
 
     @When("Verify the create and import buttons are existing.")
@@ -141,6 +145,7 @@ public class CRMUserPipelineCreateAndImportTestsSteps {
         Assert.assertTrue(crmUserPipelinePage.createButton.getText().contains("Create"));
         Assert.assertTrue(crmUserPipelinePage.importButton.getText().contains("Import"));
     }
+
 
     //STEPS FOR Item Under New Category
 
@@ -192,19 +197,8 @@ public class CRMUserPipelineCreateAndImportTestsSteps {
         Assert.assertTrue(qualifiedPage.lostStatus.getText().contains("Lost"));
     }
 
-    //STEPS FOR Module Options Tests
 
-//    @And("Verify the module tabs contains {string} module")
-//    public void verify_the_module_tabs_contains_module(String moduleName) {
-//        List<WebElement> listOfModules = crmUserPipelinePage.getListOfHeaders();
-//        List<String> allModules = new ArrayList<>();
-//        for (WebElement module : listOfModules) {
-//            allModules.add(module.getText());
-//        }
-//        System.out.println(allModules);
-//
-//        Assert.assertTrue(allModules.contains(moduleName));
-//    }
+    //STEPS FOR Module Options Tests
 
     @And("Verify the module tabs contains {string} module")
     public void verify_the_module_tabs_contains_module(String moduleName) {
@@ -215,17 +209,17 @@ public class CRMUserPipelineCreateAndImportTestsSteps {
             moduleName = expectedModule.get("module name");
             System.out.println(moduleName);
 
-        }
-
-        List<WebElement> listOfActualModules = crmUserPipelinePage.getListOfHeaders();
-        List<String> allModules = new ArrayList<>();
-        for (WebElement module : listOfActualModules) {
-            allModules.add(module.getText());
-        }
+            List<WebElement> listOfActualModules = crmUserPipelinePage.getListOfHeaders();
+            List<String> allModules = new ArrayList<>();
+            for (WebElement module : listOfActualModules) {
+                allModules.add(module.getText());
+            }
             System.out.println(allModules);
 
-        Assert.assertTrue(allModules.contains(moduleName));
+            Assert.assertTrue(allModules.contains(moduleName));
+        }
     }
+
 
 
 }

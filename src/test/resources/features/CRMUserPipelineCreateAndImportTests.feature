@@ -18,7 +18,7 @@ Feature: CRM User Pipeline Page Create and Import Functionalities and Qualified 
       | Sale 1      |
       | Sale 2      |
 
-
+#  @wip
   Scenario Outline:Item Under New Category
     When Clear the search box by clicking the x
     Then Click on the "<new created opportunity>" under New
@@ -27,6 +27,7 @@ Feature: CRM User Pipeline Page Create and Import Functionalities and Qualified 
       | new created opportunity |
       | Sale 1                  |
       | Sale 2                  |
+
 
   Scenario Outline: Change the opportunity information as user Test
     When Click on recently created "<oppt>"
@@ -75,7 +76,6 @@ Feature: CRM User Pipeline Page Create and Import Functionalities and Qualified 
     When Verify the create and import buttons are existing.
 
 
-  @wip
   Scenario Outline:Module Options Tests
     And Verify the module tabs contains "<moduleNames>" module
     Examples:
