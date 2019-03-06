@@ -244,8 +244,8 @@ public class CRMUserPipelineTestsSteps {
     }
 
 
-    @Then("Enter data of {string} for all areas")
-    public void enter_data_of_for_all_areas(Integer int1) {
+    @Then("Enter data of info for all areas")
+    public void enter_data_of_info_for_all_areas() {
         ExcelUtil excelUtil = new ExcelUtil("./src/test/resources/testData/CRMUserPipelineData.xlsx", "data");
 
         List<Map<String, String>> excelData = excelUtil.getDataList();
@@ -268,6 +268,7 @@ public class CRMUserPipelineTestsSteps {
             Driver.getDriver().findElement(By.xpath("//button[@class='btn btn-primary btn-sm o-kanban-button-new']")).click();
         }
     }
+
 
 
 // STEPS FOR Creating an event using calender icon
@@ -338,33 +339,4 @@ public class CRMUserPipelineTestsSteps {
 
 }
 
-
-
-//    @Then("Enter data of {int} for all areas")
-//    public void enter_data_of_for_all_areas(Integer int1) {
-//        ExcelUtil excelUtil = new ExcelUtil("./src/test/resources/testData/CRMUserPipelineData.xlsx", "data");
-//
-//        switch (int1) {
-//            case 1:
-//                crmUserPipelinePage.expectedRevenue1.clear();
-//                crmUserPipelinePage.expectedRevenue1.sendKeys(excelUtil.getCellData(1, 1));
-//                crmUserPipelinePage.probability.clear();
-//                crmUserPipelinePage.probability.sendKeys(excelUtil.getCellData(1, 2));
-//                crmUserPipelinePage.email1.sendKeys(excelUtil.getCellData(1, 3));
-//                crmUserPipelinePage.phone.clear();
-//                crmUserPipelinePage.phone.sendKeys(excelUtil.getCellData(1, 4));
-//                break;
-//
-//            case 2:
-//                crmUserPipelinePage.expectedRevenue1.clear();
-//                crmUserPipelinePage.expectedRevenue1.sendKeys(excelUtil.getCellData(2, 1));
-//                crmUserPipelinePage.probability.clear();
-//                crmUserPipelinePage.probability.sendKeys(excelUtil.getCellData(2, 2));
-//                crmUserPipelinePage.email1.sendKeys(excelUtil.getCellData(2, 3));
-//                crmUserPipelinePage.phone.clear();
-//                crmUserPipelinePage.phone.sendKeys(excelUtil.getCellData(2, 4));
-//                break;
-//        }
-//
-//    }
 

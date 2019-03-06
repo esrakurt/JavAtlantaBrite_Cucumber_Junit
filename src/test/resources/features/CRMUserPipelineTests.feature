@@ -75,14 +75,14 @@ Feature: CRM User Pipeline Page Create and Import Functionalities and Qualified 
   Scenario:Verifying Create and Import Test
     When Verify the create and import buttons are existing.
 
-
+  @excel
   Scenario Outline:Module Options Tests
     And Verify the module tabs contains "<moduleNames>" module
     Examples:
       | moduleNames |
       | module      |
 
-
+  @wip @excel
   Scenario Outline: Create new opportunity with detail information as user Test
     When Click on create button
     Then Enter data of <data> for all areas
@@ -91,7 +91,7 @@ Feature: CRM User Pipeline Page Create and Import Functionalities and Qualified 
       | data |
       | info |
 
-  @wip
+  @excel
   Scenario Outline: Creating an event using calender icon
     When Click on calender icon on top right
     Then Select a date
@@ -102,7 +102,7 @@ Feature: CRM User Pipeline Page Create and Import Functionalities and Qualified 
       | event 1        |
       | event 2        |
 
-
+  @excel
   Scenario Outline: Verifying pivot table measures
     When Click on pivot icon on top right
     Then Click on measures button
@@ -111,6 +111,11 @@ Feature: CRM User Pipeline Page Create and Import Functionalities and Qualified 
     Examples:
       | expected subtitles |
       | subtitle           |
+
+
+
+    Scenario:
+
 
 
 
