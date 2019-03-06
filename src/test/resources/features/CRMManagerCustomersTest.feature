@@ -1,3 +1,4 @@
+#@wip
 @BRIT-4200
 Feature: User should be able to see current customer cards, and create new customer cards
 
@@ -7,7 +8,6 @@ Feature: User should be able to see current customer cards, and create new custo
     And login with valid credentials
     When navigate CRM module
     Then go to Customers page
-
 
 
   @BRIT-3186
@@ -52,3 +52,33 @@ Feature: User should be able to see current customer cards, and create new custo
     When click on Company button
     Then Individual button will be un-selected
     And Company button will be selected
+
+  @BRIT-3170
+  Scenario: Total customer cards
+    When total number of customer cards should be 80
+
+  @BRIT-3174
+  Scenario: Right arrow button
+    When click on right arrow button
+    Then verify that number interval "81-160" displayed
+    When total number of customer cards should be 80
+
+  @BRIT-3178
+  Scenario: Left arrow button
+    Then save all customer names on existing cards
+    When click on right arrow button
+    And click on left arrow button
+    Then save all customer names on existing cards again
+    And verify that two name lists match
+
+  @BRIT-3151
+  Scenario: List view and Kanban view same lists
+    Then save all customer names on existing cards
+    When click on List button
+    Then save all customer names on existing cards in List view
+    And verify that two name lists are matching
+
+
+
+
+

@@ -1,4 +1,4 @@
-@wip
+#@wip
 Feature: Manager PipeLine Page
 
   As a CRM Manager, I should be able to navigate to CRM Module

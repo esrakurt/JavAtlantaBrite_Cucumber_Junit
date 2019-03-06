@@ -24,6 +24,4 @@ public class Hooks {
         Thread.sleep(2000);
         Driver.closeDriver();
     }
-
-
 }

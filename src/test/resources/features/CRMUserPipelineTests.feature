@@ -6,6 +6,7 @@ Feature: CRM User Pipeline Page Create and Import Functionalities and Qualified 
   Background:
     Given user on the pipeline page after login using valid credentials
 
+
   Scenario Outline: Create an Opportunity as User Test
     When Click on create button
     Then Enter name of new opportunity as "<opportunity>"
@@ -17,7 +18,7 @@ Feature: CRM User Pipeline Page Create and Import Functionalities and Qualified 
       | Sale 1      |
       | Sale 2      |
 
-  @wip (order = 2)
+
   Scenario Outline:Item Under New Category
     When Clear the search box by clicking the x
     Then Click on the "<new created opportunity>" under New
@@ -26,6 +27,7 @@ Feature: CRM User Pipeline Page Create and Import Functionalities and Qualified 
       | new created opportunity |
       | Sale 1                  |
       | Sale 2                  |
+
 
   Scenario Outline: Change the opportunity information as user Test
     When Click on recently created "<oppt>"
@@ -75,11 +77,44 @@ Feature: CRM User Pipeline Page Create and Import Functionalities and Qualified 
 
 
   Scenario Outline:Module Options Tests
-    And Verify the module tabs contains "<moduleName>" module
+    And Verify the module tabs contains "<moduleNames>" module
     Examples:
-      | moduleName |
-      | CRM        |
-      | Discuss    |
-      | Calendar   |
+      | moduleNames |
+      | module      |
+
+
+  Scenario Outline: Create new opportunity with detail information as user Test
+    When Click on create button
+    Then Enter data of <data> for all areas
+    And Click on save button
+    Examples:
+      | data |
+      | info |
+
+  @wip
+  Scenario Outline: Creating an event using calender icon
+    When Click on calender icon on top right
+    Then Select a date
+    And Create an event using <calender event>
+
+    Examples:
+      | calender event |
+      | event 1        |
+      | event 2        |
+
+
+  Scenario Outline: Verifying pivot table measures
+    When Click on pivot icon on top right
+    Then Click on measures button
+    And Verify the measure subtitles are matching with the "<expected subtitles>"
+
+    Examples:
+      | expected subtitles |
+      | subtitle           |
+
+
+
+
+
 
 
