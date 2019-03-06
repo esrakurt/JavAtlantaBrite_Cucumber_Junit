@@ -2,6 +2,7 @@ package com.cybertek.step_definitions;
 
 
 import com.cybertek.pages.LoginPage;
+import com.cybertek.utilities.BrowserUtils;
 import com.cybertek.utilities.ConfigurationReader;
 import com.cybertek.utilities.Driver;
 import cucumber.api.java.en.Given;
@@ -17,7 +18,9 @@ public class LoginStepDefs {
     public void user_on_the_login_page() {
 
         Driver.getDriver().get(ConfigurationReader.getProperty("url"));
-        login.selectBriteErpDemo();
+        BrowserUtils.wait(1);
+        login.signIn.click();
+
 
     }
 
