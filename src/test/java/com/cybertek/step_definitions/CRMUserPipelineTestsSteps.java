@@ -4,6 +4,7 @@ import com.cybertek.pages.CRMUserPipelineChangeOpportunityInfoPage;
 import com.cybertek.pages.CRMUserPipelinePage;
 import com.cybertek.pages.CRMUserPipelineQualifiedPage;
 import com.cybertek.pages.LoginPage;
+import com.cybertek.utilities.BrowserUtils;
 import com.cybertek.utilities.ConfigurationReader;
 import com.cybertek.utilities.Driver;
 import com.cybertek.utilities.ExcelUtil;
@@ -14,13 +15,14 @@ import cucumber.api.java.en.When;
 import cucumber.api.java.en_scouse.An;
 import org.junit.Assert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class CRMUserPipelineCreateAndImportTestsSteps {
+public class CRMUserPipelineTestsSteps {
 
     CRMUserPipelinePage crmUserPipelinePage = new CRMUserPipelinePage();
     CRMUserPipelineChangeOpportunityInfoPage crmUserPipelineChangeOpportunityInfoPage = new CRMUserPipelineChangeOpportunityInfoPage();
@@ -220,6 +222,149 @@ public class CRMUserPipelineCreateAndImportTestsSteps {
         }
     }
 
+    // STEPS FOR Create new opportunity with detail information as user Test
+
+    @Then("Enter name of new opportunity {int}")
+    public void enter_name_of_new_opportunity(Integer int1) {
+        ExcelUtil excelUtil = new ExcelUtil("./src/test/resources/testData/CRMUserPipelineData.xlsx", "data");
+
+        switch (int1) {
+            case 1:
+                crmUserPipelinePage.opportunityTitle.sendKeys(excelUtil.getCellData(1, 0));
+                break;
+            case 2:
+                crmUserPipelinePage.opportunityTitle.sendKeys(excelUtil.getCellData(2, 0));
+                break;
+        }
+    }
+
+    @Then("Click on create and edit button")
+    public void click_on_create_and_edit_button() {
+        crmUserPipelinePage.createAndEdit.click();
+    }
+
+
+    @Then("Enter data of {string} for all areas")
+    public void enter_data_of_for_all_areas(Integer int1) {
+        ExcelUtil excelUtil = new ExcelUtil("./src/test/resources/testData/CRMUserPipelineData.xlsx", "data");
+
+        List<Map<String, String>> excelData = excelUtil.getDataList();
+
+        for (int i = 0; i < excelData.size(); i++) {
+            crmUserPipelinePage.opportunityTitle.sendKeys(excelData.get(i).get("opportunity name"));
+            crmUserPipelinePage.createAndEdit.click();
+            crmUserPipelinePage.expectedRevenue1.clear();
+            crmUserPipelinePage.expectedRevenue1.sendKeys(excelData.get(i).get("expected revenue"));
+            crmUserPipelinePage.probability.clear();
+            crmUserPipelinePage.probability.sendKeys(excelData.get(i).get("probability"));
+            crmUserPipelinePage.email1.sendKeys(excelData.get(i).get("email1"));
+            crmUserPipelinePage.phone.sendKeys(excelData.get(i).get("phone"));
+            crmUserPipelineChangeOpportunityInfoPage.saveButton.click();
+            if (i == excelData.size()-1) {
+                break;
+            }
+            crmUserPipelinePage.CRMButton.click();
+            BrowserUtils.wait(3);
+            Driver.getDriver().findElement(By.xpath("//button[@class='btn btn-primary btn-sm o-kanban-button-new']")).click();
+        }
+    }
+
+
+// STEPS FOR Creating an event using calender icon
+
+    @When("Click on calender icon on top right")
+    public void click_on_calender_icon_on_top_right() {
+
+        crmUserPipelinePage.calendar.click();
+    }
+
+    @Then("Select a date")
+    public void select_a_date() {
+
+        crmUserPipelinePage.pickDate(18);
+        crmUserPipelinePage.day.click();
+        BrowserUtils.wait(3);
+        crmUserPipelinePage.pickTime("09:00:00");
+    }
+
+    @Then("Create an event using event {int}")
+    public void create_an_event_using_event(Integer int1) {
+        ExcelUtil excelUtil = new ExcelUtil("./src/test/resources/testData/CRMUserPipelineData.xlsx", "event");
+
+        switch (int1) {
+            case 1:
+                crmUserPipelinePage.summary.sendKeys(excelUtil.getCellData(1, 0));
+                crmUserPipelinePage.create1.click();
+                break;
+            case 2:
+                crmUserPipelinePage.summary.sendKeys(excelUtil.getCellData(2, 0));
+                crmUserPipelinePage.create1.click();
+        }
+    }
+
+    // STEPS FOR Verifying pivot table measures
+
+    @When("Click on pivot icon on top right")
+    public void click_on_pivot_icon_on_top_right() {
+        crmUserPipelinePage.pivot.click();
+    }
+
+    @Then("Click on measures button")
+    public void click_on_measures_button() {
+        crmUserPipelinePage.measures.click();
+    }
+
+    @Then("Verify the measure subtitles are matching with the {string}")
+    public void verify_the_measure_subtitles_are_matching_with_the(String string) {
+
+        ExcelUtil excelUtil = new ExcelUtil("./src/test/resources/testData/CRMUserPipelineData.xlsx", "pivot measures");
+
+        List<WebElement> allSubtitles = crmUserPipelinePage.getListOfSubtitles();
+        List<String> actualSubtitles = new ArrayList<>();
+        for (WebElement subtitle : allSubtitles) {
+            actualSubtitles.add(subtitle.getText());
+        }
+        System.out.println("Actual Subtitles: " + actualSubtitles);
+
+        List<Map<String, String>> measureSubtitles = excelUtil.getDataList();
+        for (int i = 0; i < measureSubtitles.size(); i++) {
+            System.out.println("Subtitle " + i + ": " + measureSubtitles.get(i).get("measure"));
+            Assert.assertTrue(actualSubtitles.contains(measureSubtitles.get(i).get("measure")));
+            System.out.println("Subtitle matched with the actual");
+        }
+    }
+
 
 
 }
+
+
+
+//    @Then("Enter data of {int} for all areas")
+//    public void enter_data_of_for_all_areas(Integer int1) {
+//        ExcelUtil excelUtil = new ExcelUtil("./src/test/resources/testData/CRMUserPipelineData.xlsx", "data");
+//
+//        switch (int1) {
+//            case 1:
+//                crmUserPipelinePage.expectedRevenue1.clear();
+//                crmUserPipelinePage.expectedRevenue1.sendKeys(excelUtil.getCellData(1, 1));
+//                crmUserPipelinePage.probability.clear();
+//                crmUserPipelinePage.probability.sendKeys(excelUtil.getCellData(1, 2));
+//                crmUserPipelinePage.email1.sendKeys(excelUtil.getCellData(1, 3));
+//                crmUserPipelinePage.phone.clear();
+//                crmUserPipelinePage.phone.sendKeys(excelUtil.getCellData(1, 4));
+//                break;
+//
+//            case 2:
+//                crmUserPipelinePage.expectedRevenue1.clear();
+//                crmUserPipelinePage.expectedRevenue1.sendKeys(excelUtil.getCellData(2, 1));
+//                crmUserPipelinePage.probability.clear();
+//                crmUserPipelinePage.probability.sendKeys(excelUtil.getCellData(2, 2));
+//                crmUserPipelinePage.email1.sendKeys(excelUtil.getCellData(2, 3));
+//                crmUserPipelinePage.phone.clear();
+//                crmUserPipelinePage.phone.sendKeys(excelUtil.getCellData(2, 4));
+//                break;
+//        }
+//
+//    }
+

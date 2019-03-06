@@ -75,6 +75,59 @@ public class CRMUserPipelinePage {
     @FindBy(xpath = "(//div//ul[@class='dropdown-menu o_searchview_autocomplete']//li[1])")
     public WebElement searchBoxFirstItem;
 
+    @FindBy(xpath = "//span[.='Create & Edit']")
+    public WebElement createAndEdit;
+
+
+    @FindBy(xpath = "//input[@class='o_input']")
+    public WebElement expectedRevenue1;
+
+    @FindBy(xpath = "//input[@class='o_field_integer o_field_number o_field_widget o_input']")
+    public WebElement probability;
+
+    @FindBy(xpath = "//input[@class='o_field_email o_field_widget o_input']")
+    public WebElement email1;
+
+    @FindBy(xpath = "//input[@class='o_field_phone o_field_widget o_input']")
+    public WebElement phone;
+
+    @FindBy(xpath = "//div[@class='o_priority o_field_widget']//a[1]")
+    public WebElement priority1;
+
+    @FindBy(xpath = "//button[@aria-label='calendar']")
+    public WebElement calendar;
+
+    @FindBy(xpath = "//button[@class='o_calendar_button_day btn btn-sm btn-default']")
+    public WebElement day;
+
+    public void pickDate(int day){
+        Driver.getDriver().findElement(By.xpath("//a[.='"+day+"']")).click();
+    }
+
+    public void pickTime(String time){
+        Driver.getDriver().findElement(By.xpath("//tr[@data-time='" +time +"']")).click();
+    }
+
+    @FindBy(xpath = "//input[@class='o_input']")
+    public WebElement summary;
+
+    @FindBy(xpath = "//button[@class='btn btn-sm btn-primary']")
+    public WebElement create1;
+
+    @FindBy(xpath = "//button[@aria-label='pivot']")
+    public WebElement pivot;
+
+    @FindBy(xpath = "//button[@class='btn btn-primary btn-sm dropdown-toggle']")
+    public WebElement measures;
+
+
+    public List<WebElement> getListOfSubtitles(){
+        List<WebElement> subtitles = Driver.getDriver().findElements(
+                By.xpath("//ul[@class='dropdown-menu o_pivot_measures_list']//li"));
+        return subtitles;
+    }
+
+
     public List<WebElement> getListOfHeaders(){
         List<WebElement> headers = Driver.getDriver().findElements(
                 By.xpath("//ul[@class='nav navbar-nav navbar-left oe_application_menu_placeholder']//li//a//span"));
