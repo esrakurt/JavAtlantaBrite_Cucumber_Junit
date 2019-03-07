@@ -1,7 +1,7 @@
 #@wip
-Feature: Manager PipeLine Page
+Feature:
 
-  As a CRM Manager, I should be able to navigate to CRM Module
+  Manager should be able to execute DB
 
   Background:
     Given user on the login page

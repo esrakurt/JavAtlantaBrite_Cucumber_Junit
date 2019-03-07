@@ -22,7 +22,8 @@ import java.util.Map;
         public static void createConnection() {
             String url = "jdbc:postgresql://54.148.96.210:5432/BriteErpDemo";
             String user = "podoo";
-            String password ="podoo";
+            String password = "podoo";
+
 
 
             try {
