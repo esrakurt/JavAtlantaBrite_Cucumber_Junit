@@ -20,9 +20,9 @@ import java.util.Map;
 
 
         public static void createConnection() {
-            String url = "jdbc:postgresql://room-reservation-qa.cxvqfpt4mc2y.us-east-1.rds.amazonaws.com:5432/room_reservation_qa";
-            String user = "qa_user";
-            String password = "Cybertek11!";
+            String url = "jdbc:postgresql://54.148.96.210:5432/BriteErpDemo";
+            String user = "podoo";
+            String password = "podoo";
 
 
             try {
