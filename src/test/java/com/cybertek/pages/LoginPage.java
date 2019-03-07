@@ -35,6 +35,8 @@ public class LoginPage {
     @FindBy(linkText = "CRM")
     public WebElement CRMButton;
 
+
+
     @FindBy(linkText="EventsCRM_Manager")
     public WebElement CRMManagerText;
 
