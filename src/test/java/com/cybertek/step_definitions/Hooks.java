@@ -29,10 +29,10 @@ public class Hooks {
     @Before(value = "@db")
     public void setUpDBConnection(){
         DatabaseUtility.createConnection();
-
     }
-    @After(value = "@db")
-    public  void closeDBConnection(){
+
+    @After(value = "db")
+    public void closeDBConnection(){
         DatabaseUtility.closeConnection();
     }
 }
