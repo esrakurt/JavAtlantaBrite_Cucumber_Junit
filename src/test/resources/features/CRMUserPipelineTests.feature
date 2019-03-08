@@ -82,7 +82,7 @@ Feature: CRM User Pipeline Page Create and Import Functionalities and Qualified 
       | moduleNames |
       | module      |
 
-  @wip @excel
+   @excel
   Scenario Outline: Create new opportunity with detail information as user Test
     When Click on create button
     Then Enter data of <data> for all areas
