@@ -6,12 +6,9 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
-    public class DatabaseUtility {
+public class DatabaseUtility {
 
 
         private static Connection connection;
@@ -228,6 +225,76 @@ import java.util.Map;
             return rowCount;
 
         }
+
+
+//        public static void main(String[] args) throws Exception {
+//            //scanner for entry
+//            Scanner scan = new Scanner(System.in);
+//            System.out.println("Enter the value you are looking for :");
+//            String searchObject = scan.next();
+//
+//            //connection info
+//            String url = "jdbc:postgresql://54.148.96.210:5432/BriteErpDemo";
+//            String user ="podoo";
+//            String pass ="podoo";
+//            createConnection();
+//
+//            //create table list for tables
+//            List<String> tables = new ArrayList<>();
+//            //database meta data for getting metadata from db such as all table names
+//            DatabaseUtility dbmd = connection.getMetaData();
+//            //this code is gettin all tabel data got this info from google
+//            String[] types = {"TABLE"};
+//            resultSet = dbmd.getTables(null, null, "%", types);
+//            //this code assign all table values to table list
+//            while (resultSet.next()) {
+//                tables.add(resultSet.getString("TABLE_NAME"));
+//            }
+//
+//            //here all heavy work
+//            for(int i=0;i<tables.size();i++) {
+//                //creating list for collumn key names in table
+//                List<Object>columns = new ArrayList<>();
+//                //execute query which gets all columns in i.index table
+//                executeQuery("SELECT * FROM "+tables.get(i));
+//                //creating and  resultSetMetaData and asignin our last query result to it.
+//                ResultSetMetaData rsmd = resultSet.getMetaData();
+//                //here just printing the name to see results is keep going and not freezed
+//                System.out.println("===========PROGRESS ON===================="+tables.get(i));
+//                //creating new arraylist for rows for every cell.Its two list because method return is two list.
+//                List<List<Object>> rows = new ArrayList<>();
+//                for(int j=1;j<= rsmd.getColumnCount();j++) {
+//                    //here we are adding all column Key names to list we created.
+//                    columns.add(rsmd.getColumnName(j));
+//                    //we are assignin rows list with getQueryResultList method.
+//                    rows = getQueryResultList("SELECT \""+columns.get(j-1)+"\" FROM "+tables.get(i)+";");
+//                    for(int l=0;l<rows.size();l++) {
+//                        //check if that cell contains searchin value.
+//                        if((rows.get(l).get(0)+"").contains(searchObject))
+//                            System.out.println("***********************************************FOUND***********************************************\n+"
+//                                    + "Select "+columns.get(j-1)+" FROM "+tables.get(i)+"\n"+
+//                                    "***********************************************FOUND***********************************************");
+//
+//
+//                    }
+//
+//                }
+//
+//            }
+//
+//
+//
+//
+//
+//
+//
+//            System.out.println("END HERE");
+//
+//
+//            scan.close();
+//            closeConnection();
+//        }
+
 
     }
 
