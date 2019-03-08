@@ -30,7 +30,6 @@ public class ProductSearchDBAndUIVerificationTestSteps {
         inventoryPage = new InventoryPage();
         inventoryPage.login();
         inventoryPage.inventoryLink.click();
-
     }
 
     @When("I search for {string}")
@@ -45,8 +44,29 @@ public class ProductSearchDBAndUIVerificationTestSteps {
 //        productDetails.add(inventoryPage.productPrice.getText());
 //        System.out.println(productDetails);
         expextedProductName = inventoryPage.productName.getText();
-        expectedProductPrice = Double.parseDouble((inventoryPage.productPrice.getText()).substring(1).trim() );
-        System.out.println(expextedProductName +" ..expexted ones.. "+ expectedProductPrice);
+        expectedProductPrice = Double.parseDouble((inventoryPage.productPrice.getText()).substring(1).replace(",","").trim() );
+        System.out.println(expextedProductName +" ..expected ones.. "+ expectedProductPrice);
+    }
+
+    @When("I insert a new {string} and {string}")
+    public void i_insert_a_new_product_and_price(String newProductName, String newProductPrice) {
+
+        inventoryPage.productsSubPage.click();
+        BrowserUtils.wait(5);
+        inventoryPage.createButton.click();
+        inventoryPage.productNameEntryBox.sendKeys(newProductName);
+        inventoryPage.priceEntryBox.click();
+        inventoryPage.priceEntryBox.clear();
+//        WebElement toClear = inventoryPage.priceEntryBox;
+//        toClear.sendKeys(Keys.CONTROL + "a");
+//        toClear.sendKeys(Keys.DELETE);
+        BrowserUtils.wait(3);
+        inventoryPage.priceEntryBox.sendKeys(newProductPrice);
+        inventoryPage.saveButton.click();
+        BrowserUtils.wait(2);
+        expextedProductName = inventoryPage.productName.getText();
+        expectedProductPrice = Double.parseDouble((inventoryPage.productPrice.getText()).substring(1).replace(",","").trim() );
+        System.out.println(expextedProductName +" ..expected ones.. "+ expectedProductPrice);
     }
 
     @When("I query db with {string}")
@@ -54,8 +74,9 @@ public class ProductSearchDBAndUIVerificationTestSteps {
         DatabaseUtility.createConnection();
         List<Map<String,Object>> resultMap = DatabaseUtility.getQueryResultMap(query);
         actualProductName = (String) resultMap.get(0).get("name");
-        actualProductPrice = Double.parseDouble(resultMap.get(0).get("list_price").toString());
+        actualProductPrice = Double.parseDouble(resultMap.get(0).get("list_price").toString().replace(",",""));
         System.out.println(actualProductName +" ..actual ones.. "+ actualProductPrice);
+        DatabaseUtility.closeConnection();
     }
 
     @Then("UI data and DB data must match")
@@ -63,8 +84,5 @@ public class ProductSearchDBAndUIVerificationTestSteps {
         Assert.assertEquals(expextedProductName,actualProductName);
         Assert.assertEquals(expectedProductPrice,actualProductPrice,0);
     }
-
-
-
 
 }
