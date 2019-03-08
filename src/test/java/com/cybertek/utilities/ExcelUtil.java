@@ -130,6 +130,13 @@ public class ExcelUtil {
         return workSheet.getLastRowNum()+1;
     }
 
+    public List<String> getColumnData (int columnNumber) {
+        List<String>list = new ArrayList<>();
+            for (int i = 1 ; i < rowCount() ; i++) {
+                list.add( getCellData(i, columnNumber )   );
+            }
+        return list;
+    }
 }
 
 
