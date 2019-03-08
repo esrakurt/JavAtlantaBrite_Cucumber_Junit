@@ -19,7 +19,6 @@ public class LoginStepDefs {
 
         Driver.getDriver().get(ConfigurationReader.getProperty("url"));
         BrowserUtils.wait(1);
-        login.signIn.click();
 
 
     }

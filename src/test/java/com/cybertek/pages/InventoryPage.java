@@ -46,4 +46,20 @@ public class InventoryPage {
     @FindBy(xpath = "//div[@class='o_content']//tbody/tr/td[2]/span[@name='list_price']")
     public WebElement productPrice;
 
+    @FindBy(xpath = "(//div[@class='o_cp_buttons']/div/button)[1]")
+    public WebElement createButton;
+
+    @FindBy(xpath = "//h1/input")
+    public WebElement productNameEntryBox;
+
+    @FindBy(xpath = "(//tbody)[2]/tr/td[2]/div/input")
+    public WebElement priceEntryBox;
+
+    @FindBy(xpath = "(//div[@class='o_cp_buttons']/div/div[2]/button)[1]")
+    public WebElement saveButton;
+
+
+
+
+
 }
