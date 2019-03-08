@@ -12,4 +12,9 @@ Feature: BackEnd Testing
     Given the country table in database
     And verify that table contains country Turkey
 
-
+  @wip
+  Scenario: BriteERP Application DB and UI verification
+    Given I'm on Inventory Products Page
+    When I search for "Peaches"
+    And I query db with "SELECT * FROM product_template WHERE name = 'Peaches';"
+    Then UI data and DB data must match
