@@ -1,26 +1,24 @@
 package com.cybertek.step_definitions;
 
-import com.cybertek.pages.KurtDBTestsPage;
+import com.cybertek.pages.SalesDBTestsPage;
 import com.cybertek.utilities.DatabaseUtility;
-import com.cybertek.utilities.Driver;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.junit.Assert;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 import java.util.*;
 
-public class KurtDBTestsSteps {
+public class SalesDBTestsSteps {
 
-    KurtDBTestsPage kurtDBTestsPage = new KurtDBTestsPage();
+    SalesDBTestsPage salesDBTestsPage = new SalesDBTestsPage();
 
 
-//STEPS for Verify the Sales-Quotation Numbers
+//  1) STEPS for Verify the Sales-Quotation Numbers
     @When("user is on Sales page")
     public void user_is_on_Sales_page() {
 
-        kurtDBTestsPage.SalesButton.click();
+        salesDBTestsPage.SalesButton.click();
     }
 
     List<WebElement> quotations;
@@ -28,7 +26,7 @@ public class KurtDBTestsSteps {
     @Then("gets the list of quotation numbers from UI")
     public void gets_the_list_of_quotation_numbers_from_UI() {
 
-        quotations = kurtDBTestsPage.salesQuotations;
+        quotations = salesDBTestsPage.salesQuotations;
         for (WebElement w : quotations){
             expectedDataList.add(w.getText());
         }
@@ -53,14 +51,14 @@ public class KurtDBTestsSteps {
     }
 
 
-    //    STEPS for Verify the amount of total sales
+    // 2)   STEPS for Verify the amount of total sales
 
     List<WebElement> totalSales;
     List<String> expectedTotalSales = new ArrayList<>();
     List<String > unexpectedSalesData = new ArrayList<>();
     @Then("gets the list of sales total from UI")
     public void gets_the_list_of_sales_total_from_UI() {
-        totalSales = kurtDBTestsPage.salesTotal;
+        totalSales = salesDBTestsPage.salesTotal;
         for(WebElement w : totalSales){
             if(!w.getText().contains("€")) {
                 expectedTotalSales.add(w.getText().substring(2).replace(",", ""));
@@ -84,23 +82,23 @@ public class KurtDBTestsSteps {
     @Then("verify that the total numbers are matching")
     public void verify_that_the_total_numbers_are_matching() {
         for(String s: expectedTotalSales){
-            Assert.assertTrue(actualData.contains(s));
+            Assert.assertTrue(actualData.toString().contains(s));
         }
 
     }
 
 
-//  STEPS for Verify the name and price of Apple In-Ear Headphones
+//  3) STEPS for Verify the name and price of Apple In-Ear Headphones
     @Then("user navigate to products page")
     public void user_navigate_to_products_page() {
-        kurtDBTestsPage.productsButton.click();
+        salesDBTestsPage.productsButton.click();
     }
     String productName;
     String productPrice;
     @Then("gets the product name and price from website")
     public void gets_the_product_name_and_price_from_website() {
-          productName = kurtDBTestsPage.productName.getText();
-          productPrice = kurtDBTestsPage.productPrice.getText();
+          productName = salesDBTestsPage.productName.getText();
+          productPrice = salesDBTestsPage.productPrice.getText();
 
         System.out.println("Product name: " + productName  + " Product price: " + productPrice);
     }
@@ -113,9 +111,44 @@ public class KurtDBTestsSteps {
 
         System.out.println(DBData.toString());
 
-        Assert.assertTrue(DBData.contains(productName));
-        Assert.assertTrue(DBData.contains(productPrice));
+        Assert.assertTrue(DBData.toString().contains(productName));
+        Assert.assertTrue(DBData.toString().contains(productPrice.substring(2)));
 
+    }
+
+
+//   4) STEPS for Verify whether the name of item created in on DB
+    @Then("user clicks on products and then clicks on create")
+    public void user_clicks_on_products_and_then_clicks_on_create() {
+        salesDBTestsPage.productsButton.click();
+        salesDBTestsPage.create.click();
+    }
+
+    @Then("creates a new product {string}")
+    public void creates_a_new_product(String newItem) {
+        salesDBTestsPage.enterProductName.sendKeys(newItem);
+        salesDBTestsPage.save.click();
+        salesDBTestsPage.productsButton.click();
+    }
+    String expectedProductName;
+    List<Object> productNamesDB;
+    @Then("user gets the name of item from UI and DB")
+    public void user_gets_the_name_of_item_from_UI_and_DB() {
+
+        // getting name from UI
+        expectedProductName = salesDBTestsPage.getProductName("A Test Item");
+        System.out.println("Expected Product Name: " + expectedProductName);
+
+        //getting name from DB
+        productNamesDB = DatabaseUtility.getColumnData("select name\n" +
+                "from product_template;", "name");
+        System.out.println(productNamesDB);
+    }
+
+    @Then("user verifies the name appears on DB")
+    public void user_verifies_the_name_appears_on_DB() {
+
+        Assert.assertTrue(productNamesDB.contains(expectedProductName));
     }
 
 
