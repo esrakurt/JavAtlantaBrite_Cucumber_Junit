@@ -12,6 +12,11 @@ import org.junit.runner.RunWith;
         },
         features = "src/test/resources/features",
         glue = "com/cybertek/step_definitions"
-        , tags = "@db"
+
+//       , dryRun = true
+        , tags = "@wip"
+
+)
+
 public class CukesRunner {
 }

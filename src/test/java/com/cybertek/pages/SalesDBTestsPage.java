@@ -10,16 +10,16 @@ import org.openqa.selenium.support.PageFactory;
 
 import java.util.List;
 
-public class KurtDBTestsPage {
+public class SalesDBTestsPage {
 
-    public KurtDBTestsPage() {
+    public SalesDBTestsPage() {
         PageFactory.initElements(Driver.getDriver(), this);
     }
 
     @FindBy(linkText = "Sales")
     public WebElement SalesButton;
 
-    @FindAll({@FindBy (xpath = "/html[1]/body[1]/div[1]/div[2]/div[2]/div[1]/div[1]/div[1]/table[1]/tbody[1]/tr/td[2]")})
+    @FindAll({@FindBy(xpath = "/html[1]/body[1]/div[1]/div[2]/div[2]/div[1]/div[1]/div[1]/table[1]/tbody[1]/tr/td[2]")})
     public List<WebElement> salesQuotations;
 
     @FindAll({@FindBy(xpath = "/html[1]/body[1]/div[1]/div[2]/div[2]/div[1]/div[1]/div[1]/table[1]/tbody[1]/tr/td[6]")})
@@ -33,5 +33,20 @@ public class KurtDBTestsPage {
 
     @FindBy(xpath = "(//span[@class='o_field_monetary o_field_number o_field_widget'])[1]")
     public WebElement productPrice;
+
+    @FindBy(xpath = "//button[@class='btn btn-primary btn-sm o-kanban-button-new btn-default']")
+    public WebElement create;
+
+    @FindBy(xpath = "//input[@class='o_field_char o_field_widget o_input o_required_modifier']")
+    public WebElement enterProductName;
+
+    @FindBy(xpath = "//button[@class='btn btn-primary btn-sm o_form_button_save']")
+    public WebElement save;
+
+    public String getProductName(String name) {
+        String productname = Driver.getDriver().findElement(By.xpath("//span[.='" + name + "']")).getText();
+        return productname;
+    }
+
 
 }
