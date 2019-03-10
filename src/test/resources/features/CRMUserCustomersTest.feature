@@ -2,7 +2,6 @@ Feature: Customers page
 
   Background:
     Given User on the login page
-    When User selects BriteERPDemo
     Then User logs in using "eventsCRM_User@info.com" and "opJu56KKL39"
     Then User clicks on CRM module
 
@@ -11,18 +10,15 @@ Feature: Customers page
     When User clicks on the Customers page
     Then User should be able to see Customers page.
 
-#  @wip
+
   Scenario Outline: Create new customer profile
     Given User on the Customers page
     When User clicks on create button
-    Then User should be able to enter a "<name>"
-    Then User should be able to click on save to create new customer profile.
+    Then User should be able to enter a '<name>' and save new profile.
 
     Examples:
-      | name       |
-      | Mr. Johny  |
-      | Mrs. Stacy |
-
+      | name  |
+      | user1 |
 
   Scenario: Enter company name
     Given User on the Customers page
@@ -30,7 +26,6 @@ Feature: Customers page
     Then User should select Company option
     Then User should be able to enter company name.
     Then User should be able to click on save to create new customer profile.
-
 
   Scenario: Create internal notes
     Given User on the Customers page
@@ -68,18 +63,21 @@ Feature: Customers page
   Scenario: Search for Customer Profile
     Given User on the Customers page
     When User clicks on the searchbox
-    Then User should be able to enter a customer name "Mr. Jones" in the search box
+    Then User should be able to enter a customer name "Sales" in the search box
     Then User should be able to click enter to filter
     Then User should be able to view the profiles searched for
-
 
   Scenario: Clear search box
     Given User on the Customers page
     When User clicks on the x button on the searchbox
     Then User should be able to clear the searchbox
 
-
   Scenario: Change the view option for customers list
     Given User on the Customers page
     When User clicks on the listview option
     Then User should be able to view the list of customers in a list format
+  @wip
+  Scenario: Verify that listview shows name, phone, and email information
+    Given User on the Customers page
+    When User clicks on the listview option
+    Then User should be able to see name, phone, and email information on the listview

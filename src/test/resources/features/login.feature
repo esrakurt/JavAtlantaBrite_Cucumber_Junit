@@ -1,5 +1,5 @@
 Feature: login functionality
-
+#@wip
   Scenario: user login
     Given user on the login page
     When user logs in using "manager"
