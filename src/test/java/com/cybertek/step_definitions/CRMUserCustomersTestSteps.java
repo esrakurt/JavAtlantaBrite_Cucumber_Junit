@@ -5,6 +5,7 @@ import com.cybertek.pages.LoginPage;
 import com.cybertek.utilities.BrowserUtils;
 import com.cybertek.utilities.ConfigurationReader;
 import com.cybertek.utilities.Driver;
+import com.cybertek.utilities.ExcelUtil;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -27,17 +28,15 @@ public class CRMUserCustomersTestSteps {
     @Given("User on the login page")
     public void user_on_the_login_page() {
         driver.get(ConfigurationReader.getProperty("url"));
-
-    }
-    @When("User selects BriteERPDemo")
-    public void user_selects_BriteERPDemo() {
-        loginPage.BriteErpDemo.click();
     }
     @Then("User logs in using {string} and {string}")
     public void user_logs_in_using_and(String usr, String pass) {
         loginPage.login("eventsCRM_User@info.com", "opJu56KKL39");
     }
-
+//    @When("User selects BriteERPDemo")
+//    public void user_selects_BriteERPDemo() {
+//        loginPage.BriteErpDemo.click();
+//    }
     @Then("User clicks on CRM module")
     public void user_clicks_on_CRM_module() {
         loginPage.clickCRModule();
@@ -77,16 +76,23 @@ public class CRMUserCustomersTestSteps {
         BrowserUtils.wait(5);
     }
 
-    @Then("User should be able to enter a {string}")
-    public void user_should_be_able_to_enter_a(String name) {
-        BrowserUtils.wait(5);
-     crmUserCustP.nameField.sendKeys(name);
-    }
+    @Then("User should be able to enter a {string} and save new profile.")
+    public void user_should_be_able_to_enter_a_and_save_new_profile(String string) {
 
-    @Then("User should be able to click on save to create new customer profile.")
-    public void user_should_be_able_to_click_on_save_to_create_new_customer_profile() {
-       BrowserUtils.wait(5);
-        crmUserCustP.saveButton.click();
+        ExcelUtil excelUtil = new ExcelUtil("./src/test/resources/testData/CRMCustomerUserExcel.xlsx", "Users");
+
+        for (int i=1; i<=5; i++){
+
+            crmUserCustP.nameField.sendKeys(excelUtil.getCellData(i, 0));
+            BrowserUtils.wait(5);
+            crmUserCustP.saveButton.click();
+            BrowserUtils.wait(5);
+            crmUserCustP.customersLink.click();
+            BrowserUtils.wait(10);
+            crmUserCustP.newCustomerProfile.click();
+
+        }
+
     }
 
     @Then("User should select Company option")
@@ -98,6 +104,11 @@ public class CRMUserCustomersTestSteps {
     public void user_should_be_able_to_enter_company_name() {
         crmUserCustP.nameField.sendKeys("Everland Company");
     }
+    @Then("User should be able to click on save to create new customer profile.")
+    public void user_should_be_able_to_click_on_save_to_create_new_customer_profile() {
+        crmUserCustP.saveButton.click();
+    }
+
 
     @Then("User should be able to select Internal Notes option")
     public void user_should_be_able_to_select_Internal_Notes_option() {
@@ -133,7 +144,9 @@ public class CRMUserCustomersTestSteps {
 
     @Then("User should be able to make changes")
     public void user_should_be_able_to_make_changes() {
+
         crmUserCustP.nameField.clear();
+        BrowserUtils.wait(10);
         crmUserCustP.nameField.sendKeys("Mrs. Jason");
     }
 
@@ -165,7 +178,7 @@ public class CRMUserCustomersTestSteps {
 
     @Then("User should be able to enter a customer name {string} in the search box")
     public void user_should_be_able_to_enter_a_customer_name_in_the_search_box(String string) {
-        crmUserCustP.searchbox.sendKeys("Mr. Jones");
+        crmUserCustP.searchbox.sendKeys("Sales");
     }
 
     @Then("User should be able to click enter to filter")
@@ -176,7 +189,7 @@ public class CRMUserCustomersTestSteps {
 
     @Then("User should be able to view the profiles searched for")
     public void user_should_be_able_to_view_the_profiles_searched_for() {
-        Assert.assertTrue(crmUserCustP.customerSearched.getText().contains("Mr. Jones"));
+        Assert.assertTrue(crmUserCustP.customerSearched.getText().contains("Sales"));
         System.out.println(crmUserCustP.customerSearched.getText());
     }
 
@@ -195,12 +208,27 @@ public class CRMUserCustomersTestSteps {
     @When("User clicks on the listview option")
     public void user_clicks_on_the_listview_option() {
         crmUserCustP.listView.click();
+        BrowserUtils.wait(5);
     }
 
     @Then("User should be able to view the list of customers in a list format")
     public void user_should_be_able_to_view_the_list_of_customers_in_a_list_format() {
         Assert.assertTrue(crmUserCustP.list.getText().contains("Name"));
     }
+    @Then("User should be able to see name, phone, and email information on the listview")
+    public void user_should_be_able_to_see_name_phone_and_email_information_on_the_listview() {
 
+            ExcelUtil excelUtil = new ExcelUtil("./src/test/resources/testData/CRMCustomerUserExcel.xlsx", "ListViewColumns");
+            String actualColumn1=crmUserCustP.list.getText();
+            String actualColumn2=crmUserCustP.phone.getText();
+            String actualColumn3=crmUserCustP.email.getText();
+            String expectedColumn1=excelUtil.getCellData(1,0);
+            String expectedColumn2=excelUtil.getCellData(2,0);
+            String expectedColumn3=excelUtil.getCellData(3,0);
+            Assert.assertEquals(expectedColumn1, actualColumn1);
+            Assert.assertEquals(expectedColumn2, actualColumn2);
+            Assert.assertEquals(expectedColumn3, actualColumn3);
+
+    }
 
 }

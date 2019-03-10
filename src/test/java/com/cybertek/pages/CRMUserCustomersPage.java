@@ -29,6 +29,9 @@ public class CRMUserCustomersPage {
     @FindBy (xpath = "//div[@class='o_cp_buttons']//div//button[1]")
     public WebElement newCustomerProfile;
 
+    @FindBy (xpath = "//input[@class='o_field_char o_field_widget o_input']")
+    public WebElement currentNameField;
+
     @FindBy (xpath = "//input[@class='o_field_char o_field_widget o_input o_required_modifier']")
     public WebElement nameField;
 
@@ -86,6 +89,12 @@ public class CRMUserCustomersPage {
 
     @FindBy (xpath = "/html/body/div[1]/div[2]/div[2]/div/div/div/table/thead/tr/th[2]")
     public WebElement list;
+
+    @FindBy (xpath = "/html/body/div[1]/div[2]/div[2]/div/div/div/table/thead/tr/th[3]")
+    public WebElement phone;
+
+    @FindBy (xpath = "/html/body/div[1]/div[2]/div[2]/div/div/div/table/thead/tr/th[4]")
+    public WebElement email;
 
     public String getCrmUrl(){
         String CrmUrl = Driver.getDriver().getCurrentUrl();
