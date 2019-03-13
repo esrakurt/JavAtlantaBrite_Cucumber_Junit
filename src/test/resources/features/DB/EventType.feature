@@ -18,13 +18,12 @@ Feature: Event Type  in DataBase
       | Physical Event |
 
 
-
+  @wip @db
   Scenario: UI DB compare
 
     When Event Categories page open
     Then UI data match with Db values
 
-  @db
 
   Scenario: Excel-DB values compare
 
