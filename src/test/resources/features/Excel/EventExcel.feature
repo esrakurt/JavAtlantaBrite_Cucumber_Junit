@@ -1,4 +1,4 @@
-@xl
+#@xl
 Feature: Event Type
   Background:
     Given user on the login page

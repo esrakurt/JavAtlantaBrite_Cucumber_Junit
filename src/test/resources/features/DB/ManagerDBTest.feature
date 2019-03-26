@@ -1,20 +1,19 @@
 Feature: BackEnd Testing
 
   Background:
-
     Given I'm on Inventory Products Page
 
-  @db
+#  @db @4494
   Scenario: Verify if event types are duplicated in event_types table
     Given there is a list of events in event_types table
     And event types must be unique
 
-  @db
+#  @db @4495
   Scenario: verify if the Turkey in the countries table
     Given the country table in database
     And verify that table contains country Turkey
 
-  @uidb
+#  @uidb @4496
   Scenario Outline: BriteERP Application DB and UI verification
     When I search for "<product>"
     And I query db with "SELECT * FROM product_template WHERE name = '<product>';"
@@ -28,7 +27,7 @@ Feature: BackEnd Testing
       | Tickets             |
       | Carrots             |
 
-#  @uidb
+#  @uidb @4497
   Scenario: UI against DB verification when I entered new product
     When I insert a new "dictionary" and "15.00"
     And I query db with "SELECT * FROM product_template WHERE name = 'dictionary';"

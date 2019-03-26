@@ -1,5 +1,7 @@
 package com.cybertek.utilities;
 
+import org.openqa.selenium.JavascriptExecutor;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -221,13 +223,14 @@ import java.util.Map;
         }
 
         public static int getRowCount() throws Exception {
-
             resultSet.last();
-
             int rowCount = resultSet.getRow();
             return rowCount;
-
         }
 
+        public void scroolDown (){
+            JavascriptExecutor jse = (JavascriptExecutor) Driver.getDriver();
+            jse.executeScript("Scroll(0,250);");
+        }
     }
 
