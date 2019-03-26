@@ -1,4 +1,4 @@
-#@wip
+@smoke
 Feature:
 
   Manager should be able to execute DB
