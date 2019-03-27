@@ -34,4 +34,4 @@ Feature:
       | Days to Close    |
       | Bounce           |
       | Probability      |
-      | Expected Revenuee |
+      | Expected Revenue |
